@@ -1,0 +1,273 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden; /* Prevent scrolling */
+    background: linear-gradient(to bottom, #00aaff, #00d4ff); /* Ocean-like background */
+    font-family: 'Arial', sans-serif;
+}
+
+header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0; /* Prevent shrinking */
+    margin-top: 20px; /* Space for separation */
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    border: 2px solid #0077be; /* Border around profile */
+    border-radius: 30px;
+    padding: 10px 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s;
+}
+
+.profile:hover {
+    transform: scale(1.05);
+}
+
+.avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 15px;
+    border: 2px solid #00aaff;
+}
+
+.nickname {
+    color: #0077be;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.balance-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 20px 0; /* Space between header and balance */
+    flex-shrink: 0; /* Prevent shrinking */
+}
+
+.balance {
+    font-size: 24px; /* Larger font size */
+    font-weight: bold;
+    color: #0077be;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); /* Add text shadow for clarity */
+}
+
+.balance-amount {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: #ffffff;
+    font-size: 44px;
+}
+
+main {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end; /* Position buttons lower */
+    flex-shrink: 0; /* Prevent shrinking */
+    padding-bottom: 20px; /* Add padding to move buttons up a bit */
+}
+
+.rod-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px; /* Add more space between levels */
+}
+
+.rod-level {
+    width: 80%;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: background 0.3s;
+}
+
+.rod-level:hover {
+    background: rgba(0, 119, 190, 1);
+}
+
+.rod-label {
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.rod-description {
+    color: white;
+    font-size: 14px;
+    margin: 3px 0; /* Space between label and description */
+}
+
+.mine-button {
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 14px;
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.mine-button:hover {
+    transform: scale(1.1);
+}
+
+.level-1 {
+    background: rgba(173, 216, 230, 0.8); /* Light Blue */
+}
+
+.level-1 .mine-button {
+    background-color: #87cefa; /* Light Sky Blue */
+}
+
+.level-2 {
+    background: rgba(0, 119, 190, 0.8); /* Medium Blue */
+}
+
+.level-2 .mine-button {
+    background-color: #0077be; /* Deep Sky Blue */
+}
+
+.level-3 {
+    background: rgba(0, 51, 102, 0.8); /* Dark Blue */
+}
+
+.level-3 .mine-button {
+    background-color: #003366; /* Darker Blue */
+    font-size: 18px;
+    padding: 10px 20px;
+}
+
+.progress-circle-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 200px;
+    height: 200px;
+}
+
+.progress-circle {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 10px solid #87cefa;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+}
+
+.circle-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 18px;
+    color: white;
+    text-align: center;
+}
+
+.progress-circle:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 51, 102, 0.8);
+    transform-origin: bottom;
+    transform: scaleY(0);
+    transition: transform 5m linear;
+}
+
+footer {
+    width: 100%;
+    background: linear-gradient(to right, #00d4ff, #0077be);
+    height: 70px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+    flex-shrink: 0; /* Prevent shrinking */
+}
+
+.footer-link {
+    flex: 1;
+    text-align: center;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 20px 0;
+    border-left: 1px solid rgba(255, 255, 255, 0.5);
+    border-right: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.footer-link:first-child {
+    border-left: none;
+}
+
+.footer-link:last-child {
+    border-right: none;
+}
+
+.footer-link:hover {
+    background-color: rgba(0, 119, 190, 0.5);
+}
+
+
+
+/* Existing CSS */
+
+.mining-progress {
+    position: fixed;
+    bottom: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mining-progress-circle {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: conic-gradient(#00ff00 0% 0%, transparent 0%);
+    position: relative;
+}
+
+.circle-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+}

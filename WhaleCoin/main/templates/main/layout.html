@@ -1,0 +1,21 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'main/css/main.css' %}">
+</head>
+<body>
+    {% block content %}
+    {% endblock %}
+</body>
+
+<footer>
+    <a href="{% url 'home' %}" class="footer-link">Home</a>
+    <a href="{% url 'friends' %}" class="footer-link">Frens</a>
+    <a href="{% url 'earn' %}" class="footer-link">Earn</a>
+</footer>
+</html>

@@ -1,0 +1,16 @@
+.coming-soon-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  width: 100%;
+}
+
+.coming-soon {
+  color: #ffffff;
+  font-size: 48px;
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  animation: pulse 2s infinite;
+}

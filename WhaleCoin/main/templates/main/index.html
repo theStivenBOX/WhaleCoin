@@ -1,0 +1,128 @@
+{% extends "main/layout.html" %}
+{% load static %}
+{% block title %} Home Page {% endblock %}
+
+{% block content %}
+<header>
+    <div class="profile">
+        <img src="" alt="Avatar" class="avatar">
+        {% if user.telegram_username %}
+            <span class="nickname">{{ user.telegram_username }}</span>
+        {% else %}
+            <span class="nickname">Abragadam</span>
+        {% endif %}
+    </div>
+</header>
+<div class="balance-container">
+    <div class="balance">
+        {% if user.coins %}
+            <span class="balance-amount">{{ user.coins }}</span>
+        {% else %}
+            <span class="balance-amount">12341215</span>
+        {% endif %}
+    </div>
+</div>
+<main>
+    <div class="rod-container">
+        <div class="rod-level level-1">
+            <span class="rod-label">Level 1</span>
+            <span class="rod-description">Depth: 640m</span>
+            <button class="mine-button" onclick="startMining()">Mine</button>
+        </div>
+        <div class="rod-level level-2">
+            <span class="rod-label">Level 2</span>
+            <span class="rod-description">Depth: 1280m</span>
+            <button class="mine-button" onclick="startMining()">Mine</button>
+        </div>
+        <div class="rod-level level-3">
+            <span class="rod-label">Level 3</span>
+            <span class="rod-description">Depth: 2560m</span>
+            <button class="mine-button" onclick="startMining()">Mine</button>
+        </div>
+    </div>
+</main>
+<div class="mining-progress">
+    <div class="mining-progress-circle" id="miningProgressCircle"></div>
+</div>
+
+<script>
+    function startMining(level) {
+    fetch('/start-mining/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCookie('csrftoken')
+        },
+        body: JSON.stringify({ level: level })
+    }).then(response => response.json())
+      .then(data => {
+          if (data.success) {
+              var circle = document.getElementById('miningProgressCircle');
+              var content = document.getElementById('circleContent');
+              
+              circle.style.setProperty('--progress', 0);
+              circle.style.animation = 'fill 300s linear forwards'; // 300s for 5 minutes
+              content.innerHTML = 'Mining...';
+              
+              setTimeout(function() {
+                  content.innerHTML = 'Complete!';
+                  document.getElementById('claimButton').disabled = false;
+              }, 300 * 1000); // 5 minutes
+          }
+      });
+}
+
+function claimCoins() {
+    fetch('/claim-coins/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCookie('csrftoken')
+        }
+    }).then(response => response.json())
+      .then(data => {
+          if (data.success) {
+              // Update user's balance
+              document.querySelector('.balance-amount').innerHTML = data.new_balance;
+              document.getElementById('claimButton').disabled = true;
+          }
+      });
+}
+
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+// Add the CSS for the animation to the document head
+var style = document.createElement('style');
+style.innerHTML = `
+    @keyframes fill {
+        to {
+            transform: scaleY(1);
+        }
+    }
+
+    .mining-progress-circle:before {
+        animation: fill 300s linear forwards;
+    }
+`;
+document.head.appendChild(style);
+
+
+
+</script>
+{% endblock %}
+
+
